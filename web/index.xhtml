@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">Dados da Compra</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListagem" >    
+                <h:panelGroup rendered="#{!controleDadosCompra.editando}">
+                    <div class="ui-fluid" style="width: 10%">
+                        <br />
+                        <p:commandButton value="Novo"
+                                         icon="ui-icon-plus"
+                                         actionListener="#{controleDadosCompra.novo()}"
+                                         process="@this"
+                                         update="formEdicao formListagem"/>
+                    </div>
+                    <br />
+                    <div class="ui-fluid" align="center">
+
+                        <p:dataTable value="#{controleDadosCompra.dao.listaDadosCompra}"
+                                     var="obj">
+
+                            <p:column headerText="ID" style="text-align: center">
+                               
+                                    <p:outputLabel value="#{obj.id}"/>
+                              
+                            </p:column>
+                            <p:column headerText="Cliente" style="text-align: center">
+                                <h:outputLabel value="#{obj.cliente}"/>
+                            </p:column>
+
+                            <p:column headerText="Endereço" style="text-align: center">
+                                <h:outputLabel value="#{obj.endereco}"/>
+                            </p:column>
+
+                            <p:column headerText="CEP Origem" style="text-align: center">
+                                <h:outputLabel value="#{obj.cepOrigem}"/>
+                            </p:column>
+
+                            <p:column headerText="CEP Destino" style="text-align: center">
+                                <h:outputLabel value="#{obj.cepDestino}"/>
+                            </p:column>
+
+                            <p:column headerText="Valor do Frete" style="text-align: center">
+                                <h:outputLabel value="#{obj.valorFrete}"/>
+                            </p:column>
+
+                            <p:column headerText="Prazo de Entrega" style="text-align: center">
+                                <h:outputLabel value="#{obj.dataEntrega}"/>
+                            </p:column>
+
+                            <p:column headerText="Valor da Compra" style="text-align: center">
+                                <h:outputLabel value="#{obj.valorCompra}"/>
+                            </p:column>
+                            <p:column headerText="Ações" style="text-align: center">
+                                <div align="center">
+                                    <p:commandButton icon="ui-icon-pencil" 
+                                                     actionListener="#{controleDadosCompra.alterar(obj)}" 
+                                                      process="@this"
+                                                      update="formListagem :formEdicao"/>
+                                    <p:commandButton icon="ui-icon-trash"
+                                                     actionListener="#{controleDadosCompra.remover(obj.id)}"
+                                                      process="@this"
+                                                      update="formListagem :formEdicao"/>
+                                </div>
+                            </p:column>
+                        </p:dataTable>
+                    </div> 
+                </h:panelGroup>               
+            </h:form>
+            <ui:include src="form.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://servicos.ifsul.edu.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://servicos.ifsul.edu.br/">
+
+<xs:element name="alterar" type="tns:alterar"/>
+
+<xs:element name="alterarResponse" type="tns:alterarResponse"/>
+
+<xs:element name="dadosCompra" type="tns:dadosCompra"/>
+
+<xs:element name="inserir" type="tns:inserir"/>
+
+<xs:element name="inserirResponse" type="tns:inserirResponse"/>
+
+<xs:element name="listaDadosCompra" type="tns:listaDadosCompra"/>
+
+<xs:element name="listaDadosCompraResponse" type="tns:listaDadosCompraResponse"/>
+
+<xs:element name="remover" type="tns:remover"/>
+
+<xs:element name="removerResponse" type="tns:removerResponse"/>
+
+<xs:complexType name="inserir">
+<xs:sequence>
+<xs:element name="pessoa" type="tns:dadosCompra"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dadosCompra">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="cliente" type="xs:string"/>
+<xs:element name="endereco" type="xs:string"/>
+<xs:element name="valorCompra" type="xs:double"/>
+<xs:element name="cepOrigem" type="xs:int"/>
+<xs:element name="cepDestino" type="xs:int"/>
+<xs:element name="valorFrete" type="xs:double"/>
+<xs:element name="dataEntrega" type="xs:dateTime"/>
+<xs:element name="frete" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inserirResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dadosCompra" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="alterar">
+<xs:sequence>
+<xs:element name="pessoa" type="tns:dadosCompra"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="alterarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dadosCompra" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDadosCompra">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listaDadosCompraResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dadosCompra" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="remover">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

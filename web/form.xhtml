@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!--Formulario de Edição dos Animais -->
+    <h:form id="formEdicao">
+        <h:panelGroup rendered="#{controleDadosCompra.editando}">
+            <div class="ui-fluid">
+                <!-- Para Mensagens de Erro -->
+                <p:messages/>
+                <p:panelGrid columns="2" columnClasses="ui-grid-col-2, ui-grid-col-20"
+                             layout="grid" styleClass="ui-panelgrid-blank">
+                    <f:facet name="header">
+                        <p:outputLabel value="Edição dos Dados de Compra"/>
+                    </f:facet>
+                    <h:outputLabel value="ID: "/>
+                    <h:inputText value="#{controleDadosCompra.objeto.id}"
+                                 size="5" readonly="true"/>
+                    <h:outputLabel value="Cliente "/>
+                    <h:inputText value="#{controleDadosCompra.objeto.cliente}" 
+                                 size="50" maxlength="50"/>
+
+                </p:panelGrid>
+            </div>
+        </h:panelGroup>
+        <br />
+        <br />
+
+
+        <h:panelGroup rendered="#{controleDadosCompra.editando}">
+            <p:layoutUnit position="center">
+
+                <h:outputLabel value="Tipo de Frete: "/>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <p:selectOneRadio id="frete" value="#{controleDadosCompra.objeto.frete}"
+                                      required="true" requiredMessage="O Tipo de Frete é Obrigatorio">
+                        <f:selectItem itemLabel="PAC" itemValue="41106" />
+                        <f:selectItem itemLabel="SEDEX" itemValue="04014" />
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+                <h:outputLabel value="CEP Origem:  "/>
+                <h:inputText value="#{controleDadosCompra.objeto.cepOrigem}"
+                             onkeypress="mascara(this, '#####-###')"
+                             maxlength="9"
+                             size="10"
+                             required="true" requiredMessage="O CEP de Origem  é Obrigatorio"/>
+                <br />
+                <h:outputLabel value="CEP Destino: "/>
+                <h:inputText value="#{controleDadosCompra.objeto.cepDestino}"
+                             size="10" maxlength="10"
+                             required="true" requiredMessage="O CEP de Destino é Obrigatorio"/>
+                <br />
+                <h:outputLabel value="Endereço: "/>
+                <h:inputText value="#{controleDadosCompra.objeto.endereco }"
+                             size="50" maxlength="50"/>
+                <br />
+                <h:outputLabel value="Peso"/>
+                <h:inputText value="#{controleDadosCompra.objeto.peso }"
+                             size="5" maxlength="5"
+                             required="true" requiredMessage="O Peso  é Obrigatorio"/>
+                <h:outputLabel value="Altura"/>
+                <h:inputText value="#{controleDadosCompra.objeto.altura }"
+                             size="5" maxlength="5"
+                             required="true" requiredMessage="A Altura é Obrigatorio"/>
+                <h:outputLabel value="Largura"/>
+                <h:inputText value="#{controleDadosCompra.objeto.largura }"
+                             size="5" maxlength="5"
+                             required="true" requiredMessage="A Largura é Obrigatorio"/>
+                <h:outputLabel value="Diametro"/>
+                <h:inputText value="#{controleDadosCompra.objeto.diametro }"
+                             size="5" maxlength="5"
+                             required="true" requiredMessage="O Diametro  é Obrigatorio"/>
+                <h:outputLabel value="Comprimento"/>
+                <h:inputText value="#{controleDadosCompra.objeto.comprimento }"
+                             size="5" maxlength="5"
+                             required="true" requiredMessage="o Comprimento é Obrigatorio"/>
+                <br />
+                <h:outputLabel value="Entrega em Mãos: "/>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <p:selectOneRadio id="maoPropria" value="#{controleDadosCompra.objeto.maoPropria}"
+                                      required="true" requiredMessage="Favor Selecione a Foma de Entrega:" >
+                        <f:selectItem itemLabel="SIM" itemValue="S" />
+                        <f:selectItem itemLabel="NÃO" itemValue="N" />
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+
+                <h:outputLabel value="Aviso de Entrega: "/>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <p:selectOneRadio id="aviso" value="#{controleDadosCompra.objeto.avisoRecebimento}"
+                                      required="true" requiredMessage="Favor Selecione se vai solicitar aviso de entrega:" >
+                        <f:selectItem itemLabel="SIM" itemValue="S" />
+                        <f:selectItem itemLabel="NÃO" itemValue="N" />
+                    </p:selectOneRadio>
+                </h:panelGrid>
+                <h:outputLabel value="Tipo de Embalagem: "/>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <p:selectOneRadio id="formato" value="#{controleDadosCompra.objeto.formato}"
+                                      required="true" requiredMessage="Favor Selecione o tipo de Embalagem:" >
+                        <f:selectItem itemLabel="Caixa" itemValue="1" />
+                        <f:selectItem itemLabel="Rolo" itemValue="2" />
+                        <f:selectItem itemLabel="Envelope" itemValue="3" />
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+                <h:outputLabel value="Valor do Frete: "/>
+                <h:inputText value="#{controleDadosCompra.objeto.valorFrete}"
+                             size="10" readonly="true"/>
+                <h:outputLabel value="Prazo de entrega: "/>
+                <h:inputText value="#{controleDadosCompra.objeto.dataEntrega}"
+                             size="12" readonly="true"/>
+
+                <h:outputLabel value="Valor Declarado: "/>
+                <h:inputText value="#{controleDadosCompra.objeto.valorDeclarado}"
+                             size="10" maxlength="10"
+                             required="true" requiredMessage="Valor Declarado é Obrigatorio"/>
+
+
+                <br />
+                <br />
+                <p:commandButton value="Calcular Frete" icon=" ui-icon-calculator"
+                                 actionListener="#{controleDadosCompra.calcularFrete()}"
+                                 update="formEdicao formListagem"/>
+                <br />
+                <br />
+
+
+
+
+
+
+            </p:layoutUnit>
+        </h:panelGroup>
+        <br />
+        <br />
+
+        <h:panelGroup rendered="#{controleDadosCompra.editando}">
+            <h:outputLabel value="Valor Total da Compra: "/>
+            <h:inputText value="#{controleDadosCompra.objeto.valorCompra}"
+                         size="10" maxlength="10"/>
+
+
+            <br />
+            <br />
+            <p:commandButton value="Salvar" icon="ui-icon-disk"
+                             actionListener="#{controleDadosCompra.salvar()}"
+                             update="formEdicao formListagem"/>
+
+            <p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-s"
+                             actionListener="#{controleDadosCompra.voltar()}"
+                             update="formEdicao formListagem"/>
+        </h:panelGroup>
+    </h:form>
+</html>
